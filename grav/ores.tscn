@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dt0y8yudrliw1"]
+
+[ext_resource type="Script" uid="uid://i8m36eesabd3" path="res://ores.gd" id="1_l801r"]
+[ext_resource type="Texture2D" uid="uid://b0ql03j8oiy01" path="res://meteorBrown_big1.png" id="1_lqcsa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l801r"]
+radius = 57.77543
+
+[node name="ores" type="Area2D" unique_id=506021631]
+collision_layer = 2
+script = ExtResource("1_l801r")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=24741286]
+texture = ExtResource("1_lqcsa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=907886566]
+shape = SubResource("CircleShape2D_l801r")

@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://b37sgjkbc6hyl"]
+
+[ext_resource type="Script" uid="uid://cermsmumaljpk" path="res://player.gd" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://cxniklpcinyyp" path="res://icon.svg" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dt0y8yudrliw1" path="res://ores.tscn" id="3_h2yge"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1bvp3"]
+size = Vector2(38, 37)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lquwl"]
+size = Vector2(68, 66)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h2yge"]
+bg_color = Color(0.186459, 0.18645903, 0.18645892, 1)
+border_color = Color(0.67058825, 0.56078434, 0.91764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1bvp3"]
+bg_color = Color(0.54509807, 0.8509804, 0.23137255, 1)
+border_width_left = 2
+border_width_right = 2
+border_color = Color(0.25882354, 0.8235294, 0.84313726, 1)
+
+[node name="main" type="Node2D" unique_id=500215166]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1963057791]
+position = Vector2(149, 247)
+script = ExtResource("1_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D" unique_id=1774067182]
+scale = Vector2(0.390625, 0.375)
+texture = ExtResource("2_h2yge")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=159250735]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_1bvp3")
+
+[node name="interactable_zone" type="Area2D" parent="CharacterBody2D" unique_id=751283059]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/interactable_zone" unique_id=106001775]
+shape = SubResource("RectangleShape2D_lquwl")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="CharacterBody2D" unique_id=1165240373]
+
+[node name="ProgressBar" type="ProgressBar" parent="CharacterBody2D/CanvasLayer" unique_id=1000560780]
+anchors_preset = -1
+anchor_left = 0.035
+anchor_top = 0.031
+anchor_right = 0.231
+anchor_bottom = 0.07300001
+offset_right = 4.0
+offset_bottom = -10.304005
+theme_override_styles/background = SubResource("StyleBoxFlat_h2yge")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1bvp3")
+max_value = 200.0
+value = 200.0
+show_percentage = false
+
+[node name="collect" type="Panel" parent="CharacterBody2D/CanvasLayer" unique_id=1235580663]
+anchors_preset = -1
+anchor_left = 0.282
+anchor_top = 0.023000002
+anchor_right = 0.41000003
+anchor_bottom = 0.07700001
+offset_left = 0.13598633
+offset_top = 0.095998764
+offset_right = 4.679962
+offset_bottom = 0.10399628
+
+[node name="amount" type="Label" parent="CharacterBody2D/CanvasLayer/collect" unique_id=532152537]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "ores_collected : 0"
+
+[node name="ores" parent="." unique_id=506021631 instance=ExtResource("3_h2yge")]
+position = Vector2(371, 247)
+
+[connection signal="area_entered" from="CharacterBody2D/interactable_zone" to="CharacterBody2D" method="_on_interactable_zone_area_entered"]
